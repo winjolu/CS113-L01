@@ -1,8 +1,7 @@
-{ pkgs }: {
-    deps = [
-        pkgs.graalvm17-ce
-        pkgs.maven
-        pkgs.replitPackages.jdt-language-server
-        pkgs.replitPackages.java-debug
-    ];
+{ pkgs ? import <nixpkgs> {} }:
+
+pkgs.mkShell {
+  buildInputs = [
+    pkgs.openjdk22  # Specify openjdk 22 to match your local environment
+  ];
 }

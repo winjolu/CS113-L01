@@ -1,19 +1,64 @@
 /*
  * Adult.java
  */
-// create Adult class that extends from Customer
 
+ public class Adult extends Customer {
 
+    /** 
+     * Creates a new instance of Adult
+     * 
+     * @param name the customer's name
+     * @param address the customer's address
+     * @param age the customer's age
+     * @param phoneNumber the customer's phone number
+     * @param customerNumber the customer's number
+     */
+    public Adult(String name, String address, int age, String phoneNumber, String customerNumber) {
+        super(name, address, age, phoneNumber, customerNumber);
+    }
 
- /** Creates a new instance of Adult */
+    /**
+     * Returns the type of customer.
+     * @return the type of customer
+     */
+    @Override
+    public String getType() {
+        return "Adult";
+    }
 
- /** getter for getType return "Adult" */
+    /** 
+     * Getter for Savings Interest 
+     * @return double Savings Interest
+     */
+    public double getSavingsInterest() {
+        // Implement logic to return the savings interest for Adult
+        return 0.03; // example value
+    }
 
- /** getter for Savings Interest */
+    /** 
+     * Getter for Check Interest 
+     * @return double Check Interest
+     */
+    public double getCheckInterest() {
+        // Implement logic to return the check interest for Adult
+        return 0.01; // example value
+    }
 
- /** getter for Check Interest */
+    /** 
+     * Getter for Check Charge 
+     * @return double Check Charge
+     */
+    public double getCheckCharge() {
+        // Implement logic to return the check charge for Adult
+        return 0.5; // example value
+    }
 
- /** getter for Check Charge */
-
- /** getter for OverdraftPenalty */
-
+    /** 
+     * Getter for OverdraftPenalty 
+     * @return double OverdraftPenalty
+     */
+    public double getOverdraftPenalty() {
+        // Implement logic to return the overdraft penalty for Adult
+        return 25.0; // example value
+    }
+}

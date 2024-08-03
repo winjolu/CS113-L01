@@ -2,67 +2,97 @@
  * SavingsAccount.java
  *
  */
-public class SavingsAccount extends Account{
 
- /** Creates a new instance of SavingsAccount */
+ public class SavingsAccount extends Account {
 
+  private Customer owner; // the owner of the account
 
- /***********************************************
- * Adds amount to balance
- * pre: amount must be a positive value
- * post: balance increases in amount value
- * @param amount double Deposit amount
- * @return double New account balance
- */
- @Override
- public double deposit(double amount){
-// add an new transation to the array transactions with customer number, 0 trantyp, amount, fees "DEP"
+  /** 
+   * Creates a new instance of SavingsAccount using super
+   * 
+   * @param accountNumber the account number
+   * @param owner the owner of the account
+   */
+  public SavingsAccount(String accountNumber, Customer owner) {
+      super(accountNumber);
+      this.owner = owner;
+  }
 
-// add the amoun to the balance
+  /***********************************************
+   * Adds amount to balance
+   * pre: amount must be a positive value
+   * post: balance increases in amount value
+   * @param amount double Deposit amount
+   * @return double New account balance
+   * add a new transaction to the transaction array. Use the customer number, 0 trantype, amount, and fee "DEP"
+   * add the amount to the balance
+   * add one to the tranIndex
+   * return the balance
+   */
+  @Override
+  public double deposit(double amount) {
+      if (amount > 0) {
+          transactions[tranIndex++] = new Transaction(owner.getCustomerNumber(), 0, amount, "DEP");
+          balance += amount;
+      }
+      return balance;
+  }
 
-// call the addinterest method
+  /***********************************************
+   * Subtracts amount from balance
+   * pre: amount must be a positive value
+   * post: balance decreases in amount value
+   * @param amount double Withdrawal amount
+   * @return double New account balance
+   * create a new transaction and add it to the transaction list. The new transaction will have the customer number, trantype = 0, amount = 0, fees "CR"
+   * add charge for using savings account to the amount from customer get savings charge
+   * if the amount is greater than the balance add an overdraft penalty fee from the customer overdraft penalty.
+   * subtract the amount from the balance and return the balance, remember to add 1 to the tranIndex
+   */
+  @Override
+  public double withdrawal(double amount) {
+      if (amount > 0) {
+          double totalAmount = amount + owner.getSavingsCharge();
+          if (totalAmount > balance) {
+              totalAmount += owner.getOverdraftPenalty();
+          }
+          transactions[tranIndex++] = new Transaction(owner.getCustomerNumber(), 0, amount, "CR");
+          balance -= totalAmount;
+      }
+      return balance;
+  }
 
-// add one to the tranIndex
+  /***********************************************
+   * Adds interest to balance
+   * pre: balance must be positive
+   * post: balance increases by interest amount
+   * @return double New account balance
+   * amount = balance * customer's savings interest
+   * save the transaction into the transactions[tranIndex] as new transaction with customer number, trantype = 0, amount, and fees "INT"
+   * add the amount to the balance and return the balance
+   */    
+  public double addInterest() {
+      double interest = balance * owner.getSavingsInterest();
+      transactions[tranIndex++] = new Transaction(owner.getCustomerNumber(), 0, interest, "INT");
+      balance += interest;
+      return balance;
+  }
 
-// return balance
+  /*******************************************
+   * Returns account owner
+   * @return Customer Account owner
+   */
+  @Override
+  public Customer getOwner() {
+      return owner;
+  }
 
- }
-
- /***********************************************
- * Substracts amount from balance
- * pre: amount must be a positive value
- * post: balance decreases in amount value
- * @param amount double Withdrawal amount
- * @return double New account balance
- */
- public double withdrawal(double amount){
-   // add an new transation to the array transactions with customer number, 0 trantyp, amount, fees "CR"
-
-   // subtract the amount from the balance
-
-   // add one to the tranIndex
-
-   // return the balance
-
- }
- /***********************************************
- * Adds amount to balance
- * pre: amount must be a positive value
- * post: balance increases in amount value
- * @return double New account balance
- */
- public double addInterest(){
-  // create an amount from the balance times the customer savings interest
-   
-
-  // add an new transation to the array transactions with customer number, 0 trantyp, amount, fees "CR"
-
-   // add the amount to the balance
-
-
-   // add one to the tranIndex
-
-   // return the balance
-
- }
+  /*******************************************
+   * Converts SavingsAccount object to a String object
+   * @return String account information as String object
+   */
+  @Override
+  public String toString() {
+      return super.toString() + ", Owner: " + owner.getName();
+  }
 }
