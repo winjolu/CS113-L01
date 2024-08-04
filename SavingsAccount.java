@@ -23,19 +23,14 @@
    * pre: amount must be a positive value
    * post: balance increases in amount value
    * @param amount double Deposit amount
-   * @return double New account balance
    * add a new transaction to the transaction array. Use the customer number, 0 trantype, amount, and fee "DEP"
    * add the amount to the balance
    * add one to the tranIndex
-   * return the balance
    */
-  @Override
-  public double deposit(double amount) {
+  public void deposit(double amount) { //!
       if (amount > 0) {
-          transactions[tranIndex++] = new Transaction(owner.getCustomerNumber(), 0, amount, "DEP");
-          balance += amount;
+          super.deposit(amount); // Call the superclass method //!
       }
-      return balance;
   }
 
   /***********************************************
@@ -43,39 +38,32 @@
    * pre: amount must be a positive value
    * post: balance decreases in amount value
    * @param amount double Withdrawal amount
-   * @return double New account balance
    * create a new transaction and add it to the transaction list. The new transaction will have the customer number, trantype = 0, amount = 0, fees "CR"
    * add charge for using savings account to the amount from customer get savings charge
    * if the amount is greater than the balance add an overdraft penalty fee from the customer overdraft penalty.
    * subtract the amount from the balance and return the balance, remember to add 1 to the tranIndex
    */
-  @Override
-  public double withdrawal(double amount) {
+  public void withdraw(double amount) { //!
       if (amount > 0) {
-          double totalAmount = amount + owner.getSavingsCharge();
-          if (totalAmount > balance) {
-              totalAmount += owner.getOverdraftPenalty();
+          double totalAmount = amount + owner.getSavingsCharge(); //!
+          if (totalAmount > getBalance()) { //!
+              totalAmount += owner.getOverdraftPenalty(); //!
           }
-          transactions[tranIndex++] = new Transaction(owner.getCustomerNumber(), 0, amount, "CR");
-          balance -= totalAmount;
+          super.withdraw(totalAmount); // Call the superclass method //!
       }
-      return balance;
   }
 
   /***********************************************
    * Adds interest to balance
    * pre: balance must be positive
    * post: balance increases by interest amount
-   * @return double New account balance
    * amount = balance * customer's savings interest
    * save the transaction into the transactions[tranIndex] as new transaction with customer number, trantype = 0, amount, and fees "INT"
-   * add the amount to the balance and return the balance
+   * add the amount to the balance
    */    
-  public double addInterest() {
-      double interest = balance * owner.getSavingsInterest();
-      transactions[tranIndex++] = new Transaction(owner.getCustomerNumber(), 0, interest, "INT");
-      balance += interest;
-      return balance;
+  public void addInterest() { //!
+      double interest = getBalance() * owner.getSavingsInterest(); //!
+      super.deposit(interest); // Call the superclass method //!
   }
 
   /*******************************************

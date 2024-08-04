@@ -58,10 +58,10 @@
      * Deposits a specified amount into the account
      * @param amount the amount to deposit
      */
-    public void deposit(double amount) {
+    public void deposit(double amount) { //!
         if (amount > 0) {
             balance += amount;
-            transactions[tranIndex++] = new Transaction("Deposit", amount);
+            transactions[tranIndex++] = new Transaction("Deposit", amount, "Date"); //!
         }
     }
 
@@ -69,10 +69,10 @@
      * Withdraws a specified amount from the account
      * @param amount the amount to withdraw
      */
-    public void withdraw(double amount) {
+    public void withdraw(double amount) { //!
         if (amount > 0 && amount <= balance) {
             balance -= amount;
-            transactions[tranIndex++] = new Transaction("Withdraw", amount);
+            transactions[tranIndex++] = new Transaction("Withdraw", amount, "Date"); //!
         }
     }
 }
