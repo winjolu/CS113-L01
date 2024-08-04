@@ -76,7 +76,16 @@ public class Bank {
    */
   public String makeWithdrawal(String accountNumber, double amount) {
       int index = find(accountNumber);
-      return Double.toString(accounts[index].withdraw(amount));
+      if (index == -1) {
+          return "Account not found";
+      }
+      Account account = accounts[index];
+      double currentBalance = account.getBalance();
+      if (amount > currentBalance) {
+          return "Insufficient funds";
+      }
+      account.withdraw(amount);
+      return "New balance: " + account.getBalance();
   }
 
   /***********************************************************************
