@@ -2,24 +2,15 @@
  * Customer.java
  *
  */
+abstract class Customer {
 
- abstract class Customer {
+    private String name;
+    private String address;
+    private int age;
+    private String phoneNumber;
+    private String customerNumber;
 
-    private String name; // customer's name
-    private String address; // customer's address
-    private int age; // customer's age
-    private String phoneNumber; // customer's phone number
-    private String customerNumber; // customer's number
-
-    /** 
-     * Creates a new instance of Customer
-     * 
-     * @param name the customer's name
-     * @param address the customer's address
-     * @param age the customer's age
-     * @param phoneNumber the customer's phone number
-     * @param customerNumber the customer's number
-     */
+    /** Creates a new instance of Customer */
     public Customer(String name, String address, int age, String phoneNumber, String customerNumber) {
         this.name = name;
         this.address = address;
@@ -27,12 +18,6 @@
         this.phoneNumber = phoneNumber;
         this.customerNumber = customerNumber;
     }
-
-    /**
-     * Return the type of customer.
-     * @return the type of customer
-     */
-    public abstract String getType();
 
     /*******************************************
      * Returns customer's name
@@ -123,4 +108,11 @@
     public void setCustomerNumber(String customerNumber) {
         this.customerNumber = customerNumber;
     }
+
+    // Abstract methods for charges and interest rates
+    public abstract double getCheckCharge(); //!
+    public abstract double getOverdraftPenalty(); //!
+    public abstract double getCheckInterest(); //!
+    public abstract double getSavingsCharge(); //!
+    public abstract double getSavingsInterest(); //!
 }
