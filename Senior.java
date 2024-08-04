@@ -21,7 +21,7 @@
      * Returns the type of customer.
      * @return the type of customer
      */
-    @Override
+    // @Override
     public String getType() {
         return "Senior";
     }
@@ -30,15 +30,27 @@
      * Getter for Savings Interest 
      * @return double Savings Interest
      */
+    @Override
     public double getSavingsInterest() {
         // Implement logic to return the savings interest for Senior
         return 0.04; // example value
     }
 
+     /** 
+      * Getter for Savings Charge 
+      * @return double Savings Charge
+      */
+     @Override
+     public double getSavingsCharge() { //!
+         // Implement logic to return the savings charge for Student
+         return 0.2; // example value
+     }
+
     /** 
      * Getter for Check Interest 
      * @return double Check Interest
      */
+     @Override
     public double getCheckInterest() {
         // Implement logic to return the check interest for Senior
         return 0.02; // example value
@@ -48,6 +60,7 @@
      * Getter for Check Charge 
      * @return double Check Charge
      */
+     @Override
     public double getCheckCharge() {
         // Implement logic to return the check charge for Senior
         return 0.3; // example value
@@ -57,6 +70,7 @@
      * Getter for OverdraftPenalty 
      * @return double OverdraftPenalty
      */
+     @Override
     public double getOverdraftPenalty() {
         // Implement logic to return the overdraft penalty for Senior
         return 20.0; // example value

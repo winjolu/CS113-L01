@@ -148,14 +148,11 @@ public class BankGUI {
     double amount = Double.parseDouble(theAmount);
     
     // Look up the name.
-    String theBalance = theBank.makeDeposit(accountNumber, amount);
+    double theBalance = theBank.makeDeposit(accountNumber, amount);
     String message = null;
-    if (theBalance != null) { // Name was found.
       message = "Account " + accountNumber + " new balance $" +
       theBalance;
-    } else { // Name was not found.
-      message = accountNumber + " does not exist";
-    }
+  
     // Display the result.
     JOptionPane.showMessageDialog(null, message);
   }

@@ -60,9 +60,10 @@ public class Bank {
    * @param amount double Amount to deposit
    * @return double New balance
    */
-  public String makeDeposit(String accountNumber, double amount) {
+  public double makeDeposit(String accountNumber, double amount) {
       int index = find(accountNumber);
-      return Double.toString(accounts[index].deposit(amount));
+      accounts[index].deposit(amount);
+      return accounts[index].getBalance();
   }
 
   /***********************************************************************

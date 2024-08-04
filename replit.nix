@@ -2,6 +2,6 @@
 
 pkgs.mkShell {
   buildInputs = [
-    pkgs.openjdk22  # Specify openjdk 22 to match your local environment
+    pkgs.openjdk  # Specify openjdk to match your local environment
   ];
 }
